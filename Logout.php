@@ -4,6 +4,7 @@
  
  if(session_destroy())
  {
+     echo "OFF";
   header("Location: index.php");
  }
 ?>

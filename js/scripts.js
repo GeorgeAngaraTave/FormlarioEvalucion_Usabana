@@ -97,16 +97,11 @@ $('#linkpe').click(function() {
         $.ajax({
             type: "POST",
             url: 'Logout.php',
-            data: {
-                evadato: $("#evadatope").val()
-            },
             success: function(data)
             {
-                if (data) {
-                    $('#mensaje').html(data);
-                    window.location.replace('home.php');
-                }
-                else {
+                if(data){
+                    window.location.replace('index.php');
+                }else {
                     $("#error").fadeOut();
                     $("#error").html('holaaa')
                 }
