@@ -46,11 +46,14 @@ $(document).ready(function() {
             }
         });
     });
-    $('#linkevaluar').click(function() {
+    $('#evadatope').click(function() {
 
         $.ajax({
             type: "POST",
             url: 'formulario.php',
+            data: {
+                evadato: $("#evadato").val()
+            },
             success: function(data)
             {
                 console.log(data);
@@ -87,19 +90,21 @@ $('#linkpe').click(function() {
             }
         });
    });
-$('#linkpe').click(function() {
+   
+   
+   $('#cerrar').click(function() {
 
         $.ajax({
             type: "POST",
-            url: 'listaestudiantes.php',
+            url: 'Logout.php',
             data: {
                 evadato: $("#evadatope").val()
             },
             success: function(data)
             {
                 if (data) {
-                    $('#contenido').html(data);
-                    //window.location.replace('home.php');
+                    $('#mensaje').html(data);
+                    window.location.replace('home.php');
                 }
                 else {
                     $("#error").fadeOut();
@@ -108,9 +113,8 @@ $('#linkpe').click(function() {
             }
         });
    });
-     
    
-   $('#enviarform').click(function() {
+    $('#enviarform').click(function() {
 
         $.ajax({
             type: "POST",

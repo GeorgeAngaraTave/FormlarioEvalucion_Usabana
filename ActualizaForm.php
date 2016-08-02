@@ -42,7 +42,7 @@ $consulta = array('TABLA' => 'formularios',
 //              print_r($_POST['dato']);
 //print_r($consulta);
 exit;
-$db->getInsertTabla($consulta);
+//$db->getInsertTabla($consulta);
 exit;
 // $consulta = array('TABLA' => array(), 'CAMPOS'=> array())
 
