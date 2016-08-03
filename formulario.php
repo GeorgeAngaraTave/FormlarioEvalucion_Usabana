@@ -51,7 +51,7 @@ $result = $db->getSelectTabla(
                                       'WHERE'=> array('Codigo' => $_SESSION['user_session']))  
                                     )
         );
-
+        
 foreach ($result as $value) {
     $result['Codigo'] =   $value['Codigo'];  
     $result['Nombres'] =   $value['Nombres'];

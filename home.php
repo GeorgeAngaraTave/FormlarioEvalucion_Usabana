@@ -1,39 +1,39 @@
 <?php
-session_start();
+    session_start();
 
-if(!isset($_SESSION['user_session']))
-{
- header("Location: index.php");
-}
+    if(!isset($_SESSION['user_session']))
+    {
+     header("Location: index.php");
+    }
 
-include "include/conexionDB.php";
+    include "include/conexionDB.php";
 
-$db = new conexionDB();
-$result = $db->getSelectTabla(
-                                array('TABLA' => 'usuarios', 
-                                      'CAMPOS' =>array( 'Codigo', 'Nombres','Codigo_profesor', 'Fomulario'),
-                                      'CONDICION' =>array(  
-                                      'WHERE'=> array('Codigo' => $_SESSION['user_session']))  
-                                    )
-        );
+    $db = new conexionDB();
+    $result = $db->getSelectTabla(
+                                    array('TABLA' => 'usuarios', 
+                                          'CAMPOS' =>array( 'Codigo', 'Nombres','Codigo_profesor', 'Fomulario'),
+                                          'CONDICION' =>array(  
+                                          'WHERE'=> array('Codigo' => $_SESSION['user_session']))  
+                                        )
+            );
 
-foreach ($result as $value) {
-    $result['Codigo'] =   $value['Codigo'];  
-    $result['Nombres'] =   $value['Nombres'];
-    $result['Codigo_profesor'] =   $value['Codigo_profesor'];
-    $result['Fomulario'] =   $value['Fomulario'];
-}
-
-
-if($result['Codigo_profesor']==0){
-    $variable = "Profesor";
-}  else {
-    $result['Fomulario'];
-    $variable = "Alumno";
-}
+    foreach ($result as $value) {
+        $result['Codigo'] =   $value['Codigo'];  
+        $result['Nombres'] =   $value['Nombres'];
+        $result['Codigo_profesor'] =   $value['Codigo_profesor'];
+        $result['Fomulario'] =   $value['Fomulario'];
+    }
 
 
-$db->cerrarConexion();
+    if($result['Codigo_profesor']==0){
+        $variable = "Profesor";
+    }  else {
+        $result['Fomulario'];
+        $variable = "Alumno";
+    }
+
+
+    $db->cerrarConexion();
 
 ?>
 <!DOCTYPE html>
@@ -55,6 +55,7 @@ $db->cerrarConexion();
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- TABLE STYLES-->
     <link href="js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="css/stylehome.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -74,7 +75,12 @@ $db->cerrarConexion();
                
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"><?php echo $result['Nombres']; ?>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-fw"></i> <h3>¡Hola! <?php echo  $variable."/a"; ?></h3>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"><?php echo  $result['Nombres']; ?>
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
