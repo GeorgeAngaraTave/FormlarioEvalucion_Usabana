@@ -89,6 +89,7 @@ class conexionDB {
                         }
                         
                         $consulta = "SELECT ".$campo." FROM ".$tabla.$condicon;
+                        //print_r($consulta); exit;
                         $result = $this->consultaTabla($consulta);
                         while ($rowfila = mysqli_fetch_assoc($result)){
                             $row[]= $rowfila;
@@ -118,7 +119,6 @@ class conexionDB {
                 case 'TABLA':
                     break;
                 case 'CAMPOS':
-                    
                         if(count($consulta['TABLA']) > 1){
                             foreach ($consulta['TABLA'] as $value) {
                                
@@ -150,13 +150,96 @@ class conexionDB {
         }
     }
     
-    public function getUpdateTabla($consulta){
+    public function getUpdateTabla($consulta = array('TABLA' => array(), 'CAMPOS'=> array(), 'CONDICION' => array('WHERE'=> array(), 'ORDER BY'=> array(), 'GROUP BY'=> array()))){
         
-        $this->consultaTabla($consulta);
+        foreach ($consulta as $key => $value) {
+            switch ($key) {
+                case 'TABLA':
+                    break;
+                case 'CAMPOS':
+                    break;
+                case 'CONDICION':
+                        if(count($consulta['TABLA']) > 1){
+                            foreach ($consulta['TABLA'] as $value) {
+                               
+                                $tabla[] = $value;
+                            }
+                            $tabla = implode(',',$tabla);
+                        }  else {
+                            $tabla = $consulta['TABLA'];
+                        }
+                        
+                        if(count($consulta['CAMPOS']) > 0){
+                            foreach ($consulta['CAMPOS'] as $key => $value) {
+                                $campo[] = $key."=".$value;
+                            }
+                            $campo = implode(',',$campo);
+                        }
+                        $condicon = "";
+                        if(isset($consulta['CONDICION']['WHERE'])){
+                            if(count($consulta['CONDICION']['WHERE']) > 0){
+                                foreach ($consulta['CONDICION']['WHERE'] as $key => $value) {
+                                    $campoCondicion[] = $key."=".$value;
+                                }
+                                $campoCondicion = implode(' AND ',$campoCondicion);
+                                $condicon = " WHERE ".$campoCondicion;
+                            }
+                        }
+                        
+                        $consulta = "UPDATE ".$tabla." SET ".$campo.$condicon;
+                       $this->consultaTabla($consulta);  
+                    break;
+
+                default:
+                    echo "Error en la estructura ".$key." WWW la estructura correcta es  array('tabla' => array(), 'campos'=> array())";
+                    exit;
+                    break;
+            }
+        }
     }
    
-    public function getTotalConsultas(){
-     return $this->total_consultas; 
+    public function getUsuarioConsultas($codigo){
+        $result = $this->getSelectTabla(
+                array('TABLA' => 'usuarios',
+                    'CAMPOS' => array('Codigo','Nombres','Email', 'Codigo_profesor', 'Fomulario', 'CorreoEnviado' ),
+                    'CONDICION' => array(
+                    'WHERE' => array('Codigo' => $codigo))
+                )
+        );
+        
+        return $result;
+    }
+    
+    public function getFormularioConsultas($codigoformulario){
+        $result = $this->getSelectTabla(
+                                    array('TABLA' => 'formularios', 
+                                          'CAMPOS' =>array( 
+                                              '	CodigoCreacion',
+                                              'Campo1', 
+                                              'Campo2',
+                                              'Campo3', 
+                                              'Campo4', 
+                                              'Campo5', 
+                                              'Campo6', 
+                                              'Tabla1', 
+                                              'Tabla2',
+                                              'Campo35',
+                                              'Campo36',
+                                              'Campo37',
+                                              'Campo38',
+                                              'Tabla3', 
+                                              'Tabla4',
+                                              'Campo52',
+                                              'Campo53',
+                                              'FechaCreacion',
+                                              'CodigoComentario'
+                                              ),
+                                          'CONDICION' =>array(  
+                                          'WHERE'=> array('Codigo' => $codigoformulario))  
+                                        )
+            );
+        
+        return $result;
     }
     
     public function getRangoFecha($f_inicio, $f_fin){

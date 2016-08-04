@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2016 a las 05:47:36
+-- Tiempo de generación: 04-08-2016 a las 04:22:37
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
@@ -23,50 +23,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `alumnos`
---
-
-CREATE TABLE `alumnos` (
-  `Id` int(11) NOT NULL,
-  `Codigo` int(11) NOT NULL,
-  `Nombres` varchar(60) NOT NULL,
-  `Email` varchar(90) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `comentariosformularios`
 --
 
 CREATE TABLE `comentariosformularios` (
   `Id` int(11) NOT NULL,
   `Codigo` int(11) NOT NULL,
-  `Campo1` text NOT NULL,
-  `Campo2` varchar(80) NOT NULL,
-  `Campo3` varchar(80) NOT NULL,
-  `Campo4` text NOT NULL,
-  `Campo5` text NOT NULL,
-  `Campo6` text NOT NULL,
-  `Campo7` varchar(80) NOT NULL,
-  `Campo8` varchar(80) NOT NULL,
-  `Campo9` varchar(80) NOT NULL,
-  `Campo10` varchar(80) NOT NULL,
-  `Campo11` varchar(80) NOT NULL,
-  `Campo12` text NOT NULL,
-  `Campo13` varchar(80) NOT NULL,
-  `Campo14` varchar(80) NOT NULL,
-  `Campo15` text NOT NULL,
-  `Campo16` text NOT NULL,
-  `Campo17` text NOT NULL,
-  `Campo18` text NOT NULL,
-  `Campo19` varchar(80) NOT NULL,
-  `Campo20` varchar(80) NOT NULL,
-  `Campo21` varchar(80) NOT NULL,
-  `Campo22` varchar(80) NOT NULL,
-  `Campo23` varchar(80) NOT NULL,
-  `Campo24` text NOT NULL,
-  `Campo25` varchar(80) NOT NULL,
+  `comentario2` text NOT NULL,
+  `comentario3` text NOT NULL,
+  `comentario4` text NOT NULL,
+  `comentario5` text NOT NULL,
+  `comentario6` text NOT NULL,
+  `comentario7` text NOT NULL,
+  `comentario8` text NOT NULL,
+  `comentario9` text NOT NULL,
   `FechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `CodigoProfesor` int(11) NOT NULL,
   `CodigoAlumno` int(11) NOT NULL,
@@ -83,75 +53,25 @@ CREATE TABLE `formularios` (
   `Id` int(11) NOT NULL,
   `Codigo` int(11) NOT NULL,
   `CodigoCreacion` int(11) NOT NULL,
-  `Campo1` text NOT NULL,
-  `Campo2` varchar(80) NOT NULL,
-  `Campo3` varchar(80) NOT NULL,
-  `Campo4` text NOT NULL,
-  `Campo5` text NOT NULL,
-  `Campo6` text NOT NULL,
-  `Campo7` varchar(80) NOT NULL,
-  `Campo8` varchar(80) NOT NULL,
-  `Campo9` varchar(80) NOT NULL,
-  `Campo10` varchar(80) NOT NULL,
-  `Campo11` varchar(80) NOT NULL,
-  `Campo12` text NOT NULL,
-  `Campo13` varchar(80) NOT NULL,
-  `Campo14` varchar(80) NOT NULL,
-  `Campo15` text NOT NULL,
-  `Campo16` text NOT NULL,
-  `Campo17` text NOT NULL,
-  `Campo18` text NOT NULL,
-  `Campo19` varchar(80) NOT NULL,
-  `Campo20` varchar(80) NOT NULL,
-  `Campo21` varchar(80) NOT NULL,
-  `Campo22` varchar(80) NOT NULL,
-  `Campo23` varchar(80) NOT NULL,
-  `Campo24` text NOT NULL,
-  `Campo25` varchar(80) NOT NULL,
+  `Campo1` text,
+  `Campo2` varchar(80) DEFAULT NULL,
+  `Campo3` varchar(80) DEFAULT NULL,
+  `Campo4` text,
+  `Campo5` text,
+  `Campo6` text,
+  `Tabla1` text,
+  `Tabla2` text,
+  `Campo35` varchar(80) DEFAULT NULL,
+  `Campo36` varchar(80) DEFAULT NULL,
+  `Campo37` varchar(80) DEFAULT NULL,
+  `Campo38` text,
+  `Tabla3` text,
+  `Tabla4` text,
+  `Campo52` text,
+  `Campo53` text,
   `FechaCreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CodigoComentario` int(11) NOT NULL
+  `CodigoComentario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `profesores`
---
-
-CREATE TABLE `profesores` (
-  `Id` int(11) NOT NULL,
-  `Codigo` int(11) NOT NULL,
-  `Nombres` varchar(60) NOT NULL,
-  `Email` varchar(90) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pruebas`
---
-
-CREATE TABLE `pruebas` (
-  `id` int(11) NOT NULL,
-  `numero` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `pruebas`
---
-
-INSERT INTO `pruebas` (`id`, `numero`) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 5),
-(7, 5),
-(8, 7),
-(9, 1),
-(10, 1),
-(11, 10);
 
 -- --------------------------------------------------------
 
@@ -188,15 +108,15 @@ CREATE TABLE `usuarios` (
   `Email` varchar(90) NOT NULL,
   `Codigo_profesor` int(11) DEFAULT NULL,
   `Fomulario` int(2) DEFAULT NULL,
-  `CodigoForm` int(11) NOT NULL
+  `CorreoEnviado` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`Id`, `Codigo`, `Nombres`, `Email`, `Codigo_profesor`, `Fomulario`, `CodigoForm`) VALUES
-(1, 123456789, 'Yasbley Segovia', 'yasbleysegovia@unisabana.edu.co\r\n', 0, 3, 3),
+INSERT INTO `usuarios` (`Id`, `Codigo`, `Nombres`, `Email`, `Codigo_profesor`, `Fomulario`, `CorreoEnviado`) VALUES
+(1, 123456789, 'Yasbley Segovia', 'yasbleysegovia@unisabana.edu.co\r\n', 0, 3, 0),
 (28, 201415080, 'Luis Guillermo Lopez Lopez', 'luisloplo@unisabana.edu.co', 123456789, 0, 0),
 (29, 201422126, 'Sanchez Perico Sonia Adriana', 'soniasape@unisabana.edu.co', 123456789, 0, 0),
 (31, 201422130, 'Rojas Higuera Javier Antonio', 'javierrohi@unisabana.edu.co', 123456789, 0, 0),
@@ -205,13 +125,13 @@ INSERT INTO `usuarios` (`Id`, `Codigo`, `Nombres`, `Email`, `Codigo_profesor`, `
 (6, 201424723, 'NancyHernandez Palacios', 'nancyhe@unisabana.edu.co', 123456789, 0, 0),
 (30, 201424758, 'Casallas Torres Luz Mery', 'luzcato@unisabana.edu.co', 123456789, 0, 0),
 (7, 201425012, 'Carlos ArturoRodriguez Villalobos', 'carlosrovi@unisabana.edu.co', 123456789, 0, 0),
-(8, 201510122, 'MaritzaVillalobos Cuchivague', 'maritzavicu@unisabana.edu.co', 123456789, 1, 0),
-(9, 201510144, 'Silvia EsperanzaAldana Leon', 'silviaalle@unisabana.edu.co', 123456789, 1, 0),
-(10, 201510681, 'Sonia EdithPacheco', 'soniapa@unisabana.edu.co', 123456789, 1, 0),
-(11, 201511271, 'Luis EmilioEspitia Sanchez', 'luisessa@unisabana.edu.co', 123456789, 1, 0),
-(12, 201511643, 'Jorge AlbertoOsorio Villa', 'jorgeosvi@unisabana.edu.co', 123456789, 1, 0),
-(13, 201511954, 'Ximena ConstanzaArdila Sanchez', 'ximenaardsa@unisabana.edu.co', 123456789, 1, 0),
-(14, 201512458, 'Carmen LuisaTovio Tovio', 'carmentoto@unisabana.edu.co', 123456789, 1, 0),
+(8, 201510122, 'MaritzaVillalobos Cuchivague', 'maritzavicu@unisabana.edu.co', 123456789, 0, 0),
+(9, 201510144, 'Silvia EsperanzaAldana Leon', 'silviaalle@unisabana.edu.co', 123456789, 0, 0),
+(10, 201510681, 'Sonia EdithPacheco', 'soniapa@unisabana.edu.co', 123456789, 0, 0),
+(11, 201511271, 'Luis EmilioEspitia Sanchez', 'luisessa@unisabana.edu.co', 123456789, 0, 0),
+(12, 201511643, 'Jorge AlbertoOsorio Villa', 'jorgeosvi@unisabana.edu.co', 123456789, 0, 0),
+(13, 201511954, 'Ximena ConstanzaArdila Sanchez', 'ximenaardsa@unisabana.edu.co', 123456789, 0, 0),
+(14, 201512458, 'Carmen LuisaTovio Tovio', 'carmentoto@unisabana.edu.co', 123456789, 0, 0),
 (15, 201513087, 'Claudia PatriciaUrbina Hernandez', 'claudiaurhe@unisabana.edu.co', 123456789, 0, 0),
 (16, 201513289, 'Luis EduardoVargas Tellez', 'luisvate@unisabana.edu.co', 123456789, 0, 0),
 (17, 201516872, 'Juan PabloZambrano Sanjuan', 'juanzamsa@unisabana.edu.co', 123456789, 0, 0),
@@ -231,11 +151,10 @@ INSERT INTO `usuarios` (`Id`, `Codigo`, `Nombres`, `Email`, `Codigo_profesor`, `
 --
 
 --
--- Indices de la tabla `alumnos`
+-- Indices de la tabla `comentariosformularios`
 --
-ALTER TABLE `alumnos`
-  ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `Id` (`Id`);
+ALTER TABLE `comentariosformularios`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indices de la tabla `formularios`
@@ -243,19 +162,6 @@ ALTER TABLE `alumnos`
 ALTER TABLE `formularios`
   ADD PRIMARY KEY (`Codigo`),
   ADD UNIQUE KEY `Id` (`Id`);
-
---
--- Indices de la tabla `profesores`
---
-ALTER TABLE `profesores`
-  ADD PRIMARY KEY (`Codigo`),
-  ADD UNIQUE KEY `Id` (`Id`);
-
---
--- Indices de la tabla `pruebas`
---
-ALTER TABLE `pruebas`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `rangofecha`
@@ -275,25 +181,15 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `alumnos`
+-- AUTO_INCREMENT de la tabla `comentariosformularios`
 --
-ALTER TABLE `alumnos`
+ALTER TABLE `comentariosformularios`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `formularios`
 --
 ALTER TABLE `formularios`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `profesores`
---
-ALTER TABLE `profesores`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pruebas`
---
-ALTER TABLE `pruebas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `rangofecha`
 --
