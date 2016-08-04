@@ -34,7 +34,7 @@
 
 
     $db->cerrarConexion();
-
+clearstatcache();
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -159,3 +159,4 @@
     <!-- Custom Js -->
     <script src="js/custom-scripts.js"></script>
     <script src="js/scripts.js" type="text/javascript"></script>
+ 
