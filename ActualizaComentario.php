@@ -60,6 +60,10 @@ $result_Upd = $db->getUpdateTabla(array('TABLA'=>'formularios',
 $db->cerrarConexion();
 clearstatcache();
 ?>
+<!-- Mensaje Alerta-->
+<div class="alert alert-success">
+    <strong>Well done!</strong> Se Guardo Exitosamente
+</div>
 
 
 

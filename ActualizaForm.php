@@ -33,13 +33,14 @@
     }
  
     if($value['Fomulario']==0 && $enviarcorreo == "enviarcorreo"){
- ?>
-    <div class="alert alert-danger">
+        $jsondata['success'] = true;
+        $jsondata['message'] = '<div class="alert alert-danger">
         <strong>Oh snap!</strong> No puede eviar correo al tutor sin guardar
-    </div>
-    <?php
+    </div>';
+    echo json_encode($jsondata);
 exit;    
     }
+    $rmd =1;
     
     if($value['Fomulario']!=0 && $enviarcorreo == "enviarcorreo"){
             $result_Upd = $db->getUpdateTabla(array('TABLA'=>'usuarios',
@@ -50,12 +51,14 @@ exit;
         ));
 
         $db->cerrarConexion();
- ?>
-<div class="alert alert-success">
-    <strong>Well done!</strong> Proceso de evaluación terminado.
-</div>
-
- <?php       
+        
+         $jsondata['success'] = false;
+        $jsondata['message'] = '<div class="alert alert-success">
+            <strong>Well done!</strong> Proceso de evaluación terminado.
+        </div>
+        ';
+         echo json_encode($jsondata);
+     
     exit;   
     }
 

@@ -99,10 +99,6 @@ clearstatcache();
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-
-                    <li>
-                        <a href="bienvenida.html"><i class="fa fa-fw fa-file"></i>Inicio</a>
-                    </li>
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> Fomulario<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level nav-tabs nav-pills nav-stacked ">
@@ -138,7 +134,17 @@ clearstatcache();
             <div id="page-inner">
 
 
-                <div id="contenido"></div>
+                <div id="contenido">
+                    
+                    
+                    <div class="jumbotron">
+                        <h1>Bienvenidos</h1>
+                        <p>Esta es la plataforma de formularis</p>
+                        <p>
+                        </p>
+                    </div>
+                    
+                </div>
                 <!-- /. ROW  -->
             </div>
             <!-- /. PAGE INNER  -->

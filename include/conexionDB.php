@@ -54,7 +54,7 @@ class conexionDB {
      *  $consulta = array('TABLA' => array(), 'CAMPOS'=> array(), 'CONDICION' => array('WHERE'=> array(), 'ORDER BY'=> array(), 'GROUP BY'=> array()))
      */
     public function getSelectTabla($consulta = array('TABLA' => array(), 'CAMPOS'=> array(), 'CONDICION' => array('WHERE'=> array(), 'ORDER BY'=> array(), 'GROUP BY'=> array()))){   
-        
+        $row = "";
         foreach ($consulta as $key => $value) {
             switch ($key) {
                 case 'TABLA':

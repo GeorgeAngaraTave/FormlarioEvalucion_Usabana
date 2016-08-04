@@ -10,7 +10,7 @@ if(!isset($_SESSION['user_session']))
 include "include/conexionDB.php";
 
 $db = new conexionDB();
-
+$result_fecha = "";
 
 if(isset($_POST['datocodigo'])){
     $evaluar = $_POST['datocodigo'];
@@ -25,14 +25,18 @@ $result_fecha = $db->getSelectTabla(
                                     )
         );
 
-
-foreach ($result_fecha as $value) {
+if(isset($result_fecha)){
+    foreach ($result_fecha as $value) {
     $result['FechaInicio'] =   $value['FechaInicio'];  
     $result['FechaFin'] =   $value['FechaFin'];
     $result['CodCeacionForm'] =   $value['CodCeacionForm'];
 }   
 
 $valida_echa = $db->getRangoFecha($result['FechaInicio'], $result['FechaFin']);
+}else{
+    $valida_echa = 1;
+}
+
 
 if($valida_echa == 1 && $evaluar != "cal"){ ?>
 <div class="alert alert-warning">
@@ -519,6 +523,7 @@ $db->cerrarConexion();
                      <!-- End  Kitchen Sink -->
                                         <input type="hidden"  id="codigoinfoest" name="codigoinfoest" value ="<?php echo $codigoinfo; ?>" >
                                         <button type="button" class="btn btn-success bottoncomentario" id="enviarcomentario">Guardar Cambios</button>
+                                        <button type="button" class="btn btn-success bottonform" id="enviarform">Guardar</button>
                                         <button type="button" class="btn btn-primary bottonform" id="enviarcorreo">Enviar al Tutor</button>
                                     </form>
                                 </div>

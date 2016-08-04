@@ -9,7 +9,8 @@ if(!isset($_SESSION['user_session']))
 include "include/conexionDB.php";
 
 $db = new conexionDB();
-
+$infUsuario = "";
+$result = "";
 
 if($_POST['evadato'] == 'E'){
     
@@ -23,6 +24,10 @@ if($_POST['evadato'] == 'E'){
                                     )
     );
     
+    if(!isset($result)){
+        $result = FALSE;
+    }
+    
 }  else {
     $tipo = "Por Evaluar";
     
@@ -33,6 +38,10 @@ if($_POST['evadato'] == 'E'){
                                       'WHERE'=> array('Codigo_profesor' => $_SESSION['user_session'], 'Fomulario' => 0 ))  
                                     )
     );
+   
+     if(!isset($result)){
+        $result = FALSE;
+    }
 }
 
 ?>
@@ -65,25 +74,32 @@ if($_POST['evadato'] == 'E'){
                                         <tbody>
                                         <?php
                                         $cont = 0;
+                                        
+                                        if($result){
                                         foreach ($result as $value) {
+                                            if(isset($value['Fomulario'])){
                                             $infUsuario = $db->getFormularioConsultas($value['Fomulario']);
+                                            }
                                         ?>
                                             <tr>
                                                 <td><?php echo $value['Codigo']; ?></td>
                                                 <td><?php echo $value['Nombres']; ?></td>
                                                 <?php if($_POST['evadato'] == 'E'){?>
                                                 <td>
-                                                    <?php foreach ($infUsuario as $valueinfo) {
-                                                        if($valueinfo['CodigoComentario']>1){
-                                                     ?>
-                                                    <a href="#" class="btn btn-primary btn-sm vercarm" id="calificar<?php echo $cont;?>" name="<?php echo $cont;?>">Ver</a>
                                                     <?php 
-                                                        }else{
+                                                    if(isset($infUsuario)){
+                                                        foreach ($infUsuario as $valueinfo) {
+                                                            if($valueinfo['CodigoComentario']>1){
+                                                     ?>
+                                                            <a href="#" class="btn btn-primary btn-sm vercarm" id="calificar<?php echo $cont;?>" name="<?php echo $cont;?>">Ver</a>
+                                                    <?php 
+                                                            }else{
                                                     ?>
                                                         <a href="#" class="btn btn-success btn-sm calificarm" id="calificar<?php echo $cont;?>" name="<?php echo $cont;?>">Evaluar</a>
                                                     <?php
+                                                            }
                                                         }
-                                                    }
+                                                     }
                                                     ?>
                                                     <input type="hidden" class="form-control codigocalim" name="codigocali" id="codigocali<?php echo $cont;?>" value="cal">
                                                     <input type="hidden" class="form-control codigocESTm" name="codigocEST[<?php echo $cont;?>]" id="codigocEST<?php echo $cont;?>" value="<?php echo $value['Codigo']; ?>">
@@ -91,6 +107,7 @@ if($_POST['evadato'] == 'E'){
                                                 <?php $cont++; }?>
                                             </tr>
                                         <?php  
+                                        }
                                         }
                                         ?>    
                                         </tbody>
@@ -112,5 +129,7 @@ if($_POST['evadato'] == 'E'){
          <!-- The JavaScript -->
 		<script src="js/scripts.js" type="text/javascript"></script>  
 <?php
+
 $db->cerrarConexion();
+clearstatcache();
 ?>

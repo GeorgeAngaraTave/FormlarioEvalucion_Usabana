@@ -130,20 +130,23 @@ $('#enviarcomentario').click(function () {
 $('#enviarcorreo').click(function () {
     $.ajax({
         type: "POST",
+        dataType: "json",
         url: 'ActualizaForm.php',
         data: {
             datocorreo: $( '#enviarcorreo').attr("id")
         },
         success: function (data)
         {
-            if (data) {
-                console.log(data);
-                $('#contenido').html(data);
-                //$('#mensaje').html(data);
-            } else {
-                $("#error").fadeOut();
-                $("#error").html('holaaa')
-            }
+            $.each(data, function(i, item) {
+               if(data.success){
+                   $('#mensaje').html(data.message);
+               }else{
+                   $('#contenido').html(data.message);
+                    $('#formulario').find('input, textarea, select, button').attr('disabled', 'disabled');
+                    $('.bottoncomentario').hide();
+                    $('.bottonform').hide();
+               }
+            });
         }
     });
 });
@@ -170,8 +173,6 @@ $(".calificarm").click(function(){ // Al hacer clic en la función
                 $('.bottonform').hide();
                 $('.comentariotext').attr('disabled', false);
                 $('#codigoinfoest').attr('disabled', false);
-                
-                bottonform
                 //$('#mensaje').html(data);
             } else {
                 $("#error").fadeOut();
