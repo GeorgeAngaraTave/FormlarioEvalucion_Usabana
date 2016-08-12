@@ -5,7 +5,7 @@ include "include/conexionDB.php";
 if(isset($_POST['usercodigo'])){
     
 $user_codigo = trim($_POST['usercodigo']);
-  
+$result = "";  
   try
   { 
   $db = new conexionDB();
@@ -16,10 +16,17 @@ $user_codigo = trim($_POST['usercodigo']);
                                       'WHERE'=> array('Codigo' => $user_codigo))  
                                     )
         );
-  
-    foreach ($result as $value) {
-       $result['Codigo'] =   $value['Codigo'];   
+
+    if(isset($result)){    
+        foreach ($result as $value) {
+           $result['Codigo'] =   $value['Codigo'];   
+        }
+    
+    }else{
+        
+        $result['Codigo'] = 0;
     }
+    
    if($result['Codigo']== $user_codigo){
     
     echo "ok"; // log in

@@ -45,6 +45,7 @@ if($_POST['evadato'] == 'E'){
 }
 
 ?>
+
  <div class="row">
                     <div class="col-md-12">
                         <h1 class="page-header">
@@ -119,13 +120,7 @@ if($_POST['evadato'] == 'E'){
                     </div>
     </div>
 <!-- DATA TABLE SCRIPTS -->
-    <script src="js/dataTables/jquery.dataTables.js"></script>
-    <script src="js/dataTables/dataTables.bootstrap.js"></script>
-         <script>
-              $('#dataTables-example').dataTable();
-                
-           
-    </script>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
          <!-- The JavaScript -->
 		<script src="js/scripts.js" type="text/javascript"></script>  
 <?php

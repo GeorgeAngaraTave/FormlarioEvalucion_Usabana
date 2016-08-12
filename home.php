@@ -100,7 +100,7 @@ clearstatcache();
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> Fomulario<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap"></i> Formulario<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level nav-tabs nav-pills nav-stacked ">
                     <?php if($result['Codigo_profesor']==0){ ?>    
                     
@@ -116,7 +116,7 @@ clearstatcache();
                     }else{
                     ?>
                             <li>
-                                <a href="#" id="linkevaluar" >Evalución</a>
+                                <a href="#" id="linkevaluar" >Evaluación</a>
                             </li>
                       
                     <?php

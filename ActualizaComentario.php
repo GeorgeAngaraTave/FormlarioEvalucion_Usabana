@@ -15,7 +15,7 @@ include "include/conexionDB.php";
 $db = new conexionDB();
 
 $codigocom = mt_rand();
-$fecha_Actual = date("d-m-Y H:i:s");
+$fecha_Actual = date("Y-m-d H:i:s");
 
 $result = $db->getSelectTabla(
             array('TABLA' => 'usuarios',
@@ -41,14 +41,15 @@ $result_Upd = $db->getUpdateTabla(array('TABLA'=>'formularios',
         'CAMPOS' => array(
         'Id' => 'NULL',
          'Codigo' => $codigocom,
+         'comentario1' => "'".$_POST['comentario1']."'",   
          'comentario2' => "'".$_POST['comentario2']."'",
          'comentario3' => "'".$_POST['comentario3']."'",
-         'comentario4' => "'".$_POST['comentario4']."'",
+         'comentario4' => "'NO VALOR'",
          'comentario5' => "'".$_POST['comentario5']."'",
          'comentario6' => "'".$_POST['comentario6']."'",
          'comentario7' => "'".$_POST['comentario7']."'",
          'comentario8' => "'".$_POST['comentario8']."'",
-         'comentario9' => "'".$_POST['comentario9']."'",  
+         'comentario9' => "'NO VALOR'",
          'FechaCreacion' => "'".$fecha_Actual."'" ,
          'CodigoProfesor' => $_SESSION['user_session'],
          'CodigoAlumno' => $codigocom,   

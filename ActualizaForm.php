@@ -35,7 +35,7 @@
     if($value['Fomulario']==0 && $enviarcorreo == "enviarcorreo"){
         $jsondata['success'] = true;
         $jsondata['message'] = '<div class="alert alert-danger">
-        <strong>Oh snap!</strong> No puede eviar correo al tutor sin guardar
+        <strong>Oh snap!</strong> No puede enviar correo al tutor sin guardar 
     </div>';
     echo json_encode($jsondata);
 exit;    
@@ -62,9 +62,9 @@ exit;
     exit;   
     }
 
-    $fecha_Actual = date("d-m-Y H:i:s");
+    $fecha_Actual = date("Y-m-d H:i:s");
     $result_fecha = $db->getSelectTabla(
-    array('TABLA' => 'RangoFecha',
+    array('TABLA' => 'rangofecha',
      'CAMPOS' => array( 'count(id) AS Id', 'CodCeacionForm')
     )
     );
@@ -94,6 +94,7 @@ exit;
         'Id' => 'NULL',
          'Codigo' => $codigo,
          'CodigoCreacion' => $result['CodCeacionForm'],
+         'Campo1' => "'".$_POST['camp1']."'",
          'Campo2' => "'".$_POST['camp2']."'",
          'Campo3' => "'".$_POST['camp3']."'",
          'Campo4' => "'".$_POST['camp4']."'",
@@ -103,24 +104,24 @@ exit;
              'camp11' => $_POST['camp11'], 'camp12' => $_POST['camp12'], 'camp13' => $_POST['camp13'], 'camp14' => $_POST['camp14'],
              'camp15' => $_POST['camp15'], 'camp16' => $_POST['camp16'], 'camp17' =>$_POST['camp17'], 'camp18' =>$_POST['camp18'],
              'camp19' => $_POST['camp19'], 'camp20' =>$_POST['camp20'], 'camp21' =>$_POST['camp21'], 'camp22' => $_POST['camp22'],
-             'camp23' => $_POST['camp23'], 'camp24' =>$_POST['camp24'], 'camp25' =>$_POST['camp25'], 'camp26' =>$_POST['camp26']
+             'camp23' => $_POST['camp23'], 'camp24' =>$_POST['camp24'], 'camp25' =>$_POST['camp25'], 'camp26' =>$_POST['camp26'],
+             'camp30' => $_POST['camp30'], 'camp31' =>$_POST['camp31'], 'camp32' =>$_POST['camp32'], 'camp33' =>$_POST['camp33'],
+             'camp34' => $_POST['camp34'], 'camp53' =>$_POST['camp53'], 'camp54' =>$_POST['camp54'], 'camp55' =>$_POST['camp55'],'camp56' =>$_POST['camp56'], 'camp57' =>$_POST['camp57']
          )))."'",
-         'Tabla2' => "'".json_encode(array('fila1' => array('camp27'=>$_POST['camp27'], 'camp28'=>$_POST['camp28'], 'camp29'=>$_POST['camp29'], 'camp30'=>$_POST['camp30'],
-             'camp31'=>$_POST['camp31'], 'camp32'=>$_POST['camp32'], 'camp33'=>$_POST['camp33'], 'camp34'=>$_POST['camp34']))
-         )."'",
          'Campo35' => "'".$_POST['camp35']."'",
          'Campo36' => "'".$_POST['camp36']."'",
          'Campo37' => "'".$_POST['camp37']."'",
          'Campo38' => "'".$_POST['camp38']."'",
          'Tabla3' => "'".json_encode(array('fila1' => array('camp39'=>$_POST['camp39'], 'camp40'=>$_POST['camp40'], 'camp41'=>$_POST['camp41'],
                 'camp42'=> $_POST['camp42'], 'camp43'=>$_POST['camp43'], 'camp44'=>$_POST['camp44'],
-                'camp45'=>$_POST['camp45'], 'camp46'=>$_POST['camp46'], 'camp47'=>$_POST['camp47']))
+                'camp45'=>$_POST['camp45'], 'camp46'=>$_POST['camp46'], 'camp47'=>$_POST['camp47'],
+                'camp27'=>$_POST['camp27'], 'camp28'=>$_POST['camp28'], 'camp29'=>$_POST['camp29']
+             ))
          )."'",
          'Tabla4' => "'".json_encode(array('fila1' => array('camp48'=>$_POST['camp48'], 'camp49'=>$_POST['camp49'],
              'camp50'=>$_POST['camp50'], 'camp51'=>$_POST['camp51']))
          )."'",
          'Campo52' => "'".$_POST['camp52']."'",
-         'Campo53' => "'".$_POST['camp53']."'",
          'CodigoComentario' => 0,
          'FechaCreacion' => "'".$fecha_Actual."'"
     ));

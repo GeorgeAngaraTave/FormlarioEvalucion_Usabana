@@ -9,16 +9,15 @@ $(document).ready(function () {
                 usercodigo: $("#usercodigo").val()
             },
             success: function (data)
-            {
-                if (data === 'ok') {
-                    window.location.replace('home.php');
+            {console.log(data);
+                if (data =='ok') {
+                  window.location.replace('home.php');
                 } else {
                     $("#error").fadeOut();
-                    $("#error").html('holaaa')
+                    $("#error").html(data);
                 }
             }
         });
-
     });
 
 });
