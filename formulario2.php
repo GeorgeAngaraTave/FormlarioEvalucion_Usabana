@@ -15,205 +15,6 @@ $comen = new Comentarios();
 $db = new conexionDB();
 $result_fecha = "";
 
-if(isset($_POST['datocodigo'])){
-    $evaluar = $_POST['datocodigo'];
-}else{
-    $evaluar = "evaNo";
-}
-
-
-$result_fecha = $db->getSelectTabla(
-                                array('TABLA' => 'rangofecha', 
-                                      'CAMPOS' =>array( 'count(id) AS Id', 'FechaInicio', 'FechaFin','CodCeacionForm')
-                                    )
-        );
-
-if(isset($result_fecha)){
-    foreach ($result_fecha as $value) {
-    $result['FechaInicio'] =   $value['FechaInicio'];  
-    $result['FechaFin'] =   $value['FechaFin'];
-    $result['CodCeacionForm'] =   $value['CodCeacionForm'];
-}   
-
-$valida_echa = $db->getRangoFecha($result['FechaInicio'], $result['FechaFin']);
-}else{
-    $valida_echa = 1;
-}
-
-
-if($valida_echa == 1 && $evaluar != "cal"){ ?>
-<div class="alert alert-warning">
-<strong>Warning!</strong> Este formulario no esta activo
-</div>
-<?php
-exit;
-}
-
-if($valida_echa == 2 && $evaluar != "cal"){ ?>
-<div class="alert alert-warning">
-<strong>Warning!</strong> Este formulario se cerro 
-</div>
-<?php
-exit;
-}
-
-if(isset($_POST['codigocest'])){
-    $codigoinfo = $_POST['codigocest'];
-}else {
-    $codigoinfo = $_SESSION['user_session'];
-}
-
-
-$result = $db->getSelectTabla(
-                                array('TABLA' => 'usuarios', 
-                                      'CAMPOS' =>array( 'Codigo', 'Nombres','Codigo_profesor', 'Fomulario', 'CorreoEnviado'),
-                                      'CONDICION' =>array(  
-                                      'WHERE'=> array('Codigo' => $codigoinfo))  
-                                    )
-        );
-        
-foreach ($result as $value) {
-    $result['Codigo'] =   $value['Codigo'];  
-    $result['Nombres'] =   $value['Nombres'];
-    $result['Codigo_profesor'] =   $value['Codigo_profesor'];
-    $result['CorreoEnviado'] =   $value['CorreoEnviado'];
-    $result['Fomulario'] =   $value['Fomulario'];
-}
-
-if($result['CorreoEnviado'] != 0 && $evaluar != "cal" ){ ?>
-    <div class="alert alert-info">
-    <strong>Heads up!</strong> Termino su evalución Exitosamente!
-    </div>
-<?php
-exit;
-}
-
-
-if($evaluar=="cal" || $result['Fomulario'] != 0 ){
-   $result = $db->getSelectTabla(
-                                    array('TABLA' => 'formularios', 
-                                          'CAMPOS' =>array( 'Campo1', 
-                                              'Campo2',
-                                              'Campo3', 
-                                              'Campo4', 
-                                              'Campo5', 
-                                              'Campo6', 
-                                              'Tabla1', 
-                                              'Campo35',
-                                              'Campo36',
-                                              'Campo37',
-                                              'Campo38',
-                                              'Tabla3', 
-                                              'Tabla4',
-                                              'Campo52',
-                                              'Campo53',
-                                              'CodigoComentario'
-                                              ),
-                                          'CONDICION' =>array(  
-                                          'WHERE'=> array('Codigo' => $result['Fomulario']))  
-                                        )
-            );
-     
-            foreach ($result as $value) {
-                $Campo1 = (isset($value['Campo1']))? $value['Campo1']: '' ;
-                $Campo2 = (isset($value['Campo2']))? $value['Campo2']: '' ;
-                $Campo3 = (isset($value['Campo3']))? $value['Campo3']: '' ;
-                $Campo4 = (isset($value['Campo4']))? $value['Campo4']: '' ;
-                $Campo5 = (isset($value['Campo5']))? $value['Campo4']: '' ;
-                $Campo6 =(isset($value['Campo6']))? $value['Campo6']: '' ;
-                $objt = json_decode($value['Tabla1']);
-                foreach ($objt as $objtvalue) {
-                    $Campo7 = (isset($objtvalue->camp7))? $objtvalue->camp7: '' ;
-                    $Campo8 = (isset($objtvalue->camp8))? $objtvalue->camp8: '' ;
-                    $Campo9 = (isset($objtvalue->camp9))? $objtvalue->camp9: '' ;
-                    $Campo10 = (isset($objtvalue->camp10))? $objtvalue->camp10: '' ;
-                    $Campo11 = (isset($objtvalue->camp11))? $objtvalue->camp11: '' ;
-                    $Campo12 = (isset($objtvalue->camp12))? $objtvalue->camp12: '' ;
-                    $Campo13 = (isset($objtvalue->camp13))? $objtvalue->camp13: '' ;
-                    $Campo14 = (isset($objtvalue->camp14))? $objtvalue->camp14: '' ;
-                    $Campo15 = (isset($objtvalue->camp15))? $objtvalue->camp15: '' ;
-                    $Campo16 = (isset($objtvalue->camp16))? $objtvalue->camp16: '' ;
-                    $Campo17 = (isset($objtvalue->camp17))? $objtvalue->camp17: '' ;
-                    $Campo18 = (isset($objtvalue->camp18))? $objtvalue->camp18: '' ;
-                    $Campo19 = (isset($objtvalue->camp19))? $objtvalue->camp19: '' ;
-                    $Campo20 = (isset($objtvalue->camp20))? $objtvalue->camp20: '' ;
-                    $Campo21 = (isset($objtvalue->camp21))? $objtvalue->camp21: '' ;
-                    $Campo22 = (isset($objtvalue->camp22))? $objtvalue->camp22: '' ;
-                    $Campo23 = (isset($objtvalue->camp23))? $objtvalue->camp23: '' ;
-                    $Campo24 = (isset($objtvalue->camp24))? $objtvalue->camp24: '' ;
-                    $Campo25 = (isset($objtvalue->camp25))? $objtvalue->camp25: '' ;
-                    $Campo26 = (isset($objtvalue->camp26))? $objtvalue->camp26: '' ;
-                    $Campo30 = (isset($objtvalue->camp30))? $objtvalue->camp30: '' ; 
-                    $Campo31 = (isset($objtvalue->camp31))? $objtvalue->camp31: '' ;
-                    $Campo32 = (isset($objtvalue->camp31))? $objtvalue->camp32: '' ;     
-                    $Campo33 = (isset($objtvalue->camp33))? $objtvalue->camp33: '' ;
-                    $Campo34 = (isset($objtvalue->camp34))? $objtvalue->camp34: '' ;
-                    $Campo53 = (isset($objtvalue->camp53))? $objtvalue->camp53: '' ;
-                    $Campo54 = (isset($objtvalue->camp54))? $objtvalue->camp54: '' ;
-                    $Campo55 = (isset($objtvalue->camp55))? $objtvalue->camp55: '' ;
-                    $Campo56 = (isset($objtvalue->camp56))? $objtvalue->camp56: '' ;
-                    $Campo57 = (isset($objtvalue->camp57))? $objtvalue->camp57: '' ;
-                }
-                  
-                $Campo35 = (isset($value['Campo35']))? $value['Campo35']: '' ;
-                $Campo36 = (isset($value['Campo36']))? $value['Campo36']: '' ;
-                $Campo37 = (isset($value['Campo37']))? $value['Campo37']: '' ;
-                $Campo38 = (isset($value['Campo38']))? $value['Campo38']: '' ;
-                  
-                $objt2 = json_decode($value['Tabla3']);
-                foreach ($objt2 as $objtvalue1) {
-                    $Campo39 = (isset($objtvalue1->camp39))? $objtvalue1->camp39: '' ;
-                    $Campo40 = (isset($objtvalue1->camp41))? $objtvalue1->camp40: '' ;
-                    $Campo41 = (isset($objtvalue1->camp41))? $objtvalue1->camp41: '' ;
-                    $Campo42 = (isset($objtvalue1->camp42))? $objtvalue1->camp42: '' ;
-                    $Campo43 = (isset($objtvalue1->camp43))? $objtvalue1->camp43: '' ;
-                    $Campo44 = (isset($objtvalue1->camp44))? $objtvalue1->camp44: '' ;
-                    $Campo45 = (isset($objtvalue1->camp45))? $objtvalue1->camp45: '' ;
-                    $Campo46 = (isset($objtvalue1->camp46))? $objtvalue1->camp46: '' ;
-                    $Campo47 = (isset($objtvalue1->camp47))? $objtvalue1->camp47: '' ;
-                    $Campo27 = (isset($objtvalue1->camp27))? $objtvalue1->camp27: '' ;
-                    $Campo28 = (isset($objtvalue1->camp28))? $objtvalue1->camp28: '' ;
-                    $Campo29 = (isset($objtvalue1->camp29))? $objtvalue1->camp29: '' ;
-                }
-               
-             
-                $objt3 = json_decode($value['Tabla4']);
-                foreach ($objt3 as $objtvalue3) {
-                    $Campo48 = (isset($objtvalue3->camp48))? $objtvalue3->camp48: '' ;
-                    $Campo49 = (isset($objtvalue3->camp49))? $objtvalue3->camp49: '' ;
-                    $Campo50 = (isset($objtvalue3->camp50))? $objtvalue3->camp50: '' ;
-                    $Campo51 = (isset($objtvalue3->camp51))? $objtvalue3->camp51: '' ;
-                }
-                
-                 
-                $Campo52 = (isset($value['Campo52']))? $value['Campo52']: '' ;
-            }  
-            
-        if(!empty($value['CodigoComentario'])){    
-            
-            $result = $db->getSelectTabla(
-                                    array('TABLA' => 'comentariosformularios', 
-                                          'CAMPOS' =>array( 'comentario1', 'comentario2', 'comentario3','comentario4', 'comentario4', 'comentario5', 'comentario6', 'comentario7', 'comentario8', 'comentario9', 'Calificacion'),
-                                          'CONDICION' =>array(  
-                                          'WHERE'=> array('Codigo' => $value['CodigoComentario']))  
-                                        )
-            );
-
-            foreach ($result as $value) {
-                $Coment0 = $value['comentario1'];
-                $Coment1 = $value['comentario2'];
-                $Coment2 = $value['comentario3'];
-                $Coment3 = $value['comentario4'];
-                $Coment4 = $value['comentario5'];
-                $Coment5 = $value['comentario6'];
-                $Coment6 = $value['comentario7'];
-                $Coment7 = $value['comentario8'];
-                $Coment8 = $value['comentario9'];
-                $calificacion = $value['Calificacion'];
-            }
-        }
-
-}
 
 
 
@@ -221,6 +22,17 @@ $db->cerrarConexion();
  clearstatcache();  
 ?>
 
+                <div class="row">
+                <div class="col-lg-12">
+                    <div id="mensaje"></div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>NO OLVIDE SU ROL COMO EVALUADOR EXTERNO DEL PROYECTO EDUCATIVO PARA ELABORAR EL INFORME TÉCNICO DE LA EVALUACIÓN.</h3>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+                </div>        
                  <!-- /. ROW  -->
               <div class="row">
                 <div class="col-lg-12">
@@ -235,7 +47,39 @@ $db->cerrarConexion();
                             <div class="row">
                                 <div class="col-lg-12">
                                     <form role="form" method="post" id="formulario">
-                                        
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                <h3>1. Justificación y contexto de la evaluación.</h3>
+                                                <br/>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Describa brevementa la institución donde se evalúa el proyecto educativo.
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <textarea class="form-control" rows="3" name="camp1" id="camp1" ><?php echo (isset($Campon1))? $Campon1: '' ;?></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <p class='text-justify'>
+                                                            A continuación se describe el problema educativo que atiende el proyecto y su respectiva justificación.<p/>
+                                                            XHTML
+
+<img src="img/ayuda.jpg" class="img-rounded" alt="bordes redondeados">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Descripción de la realidad que se va a evaluar:
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <textarea class="form-control" rows="3" name="camp1" id="camp1" ><?php echo (isset($Campo1))? $Campo1: '' ;?></textarea>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>        
+                                        </div>
                                         <div class="col-md-12 col-sm-12 ">
                                             <?php echo $comen->setCamentario(1); ?>
                                             <div class="panel panel-default">

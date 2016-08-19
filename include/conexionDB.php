@@ -137,7 +137,8 @@ class conexionDB {
                             $campo = implode(',',$campo);
                             $valor = implode(',',$valor);
                             
-                            $consulta = "INSERT INTO ".$tabla." (".$campo.")VALUES (".$valor.")";
+                          $consulta = "INSERT INTO ".$tabla." (".$campo.")VALUES (".$valor.")";
+
                             $this->consultaTabla($consulta);
                         }
                     break;

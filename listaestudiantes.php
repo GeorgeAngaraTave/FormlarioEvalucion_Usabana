@@ -18,7 +18,7 @@ if($_POST['evadato'] == 'E'){
     
     $result = $db->getSelectTabla(
                                 array('TABLA' => 'usuarios', 
-                                      'CAMPOS' =>array( 'Codigo', 'Nombres','Codigo_profesor', 'Fomulario'),
+                                      'CAMPOS' =>array( 'Codigo', 'Nombres','Codigo_profesor', 'Fomulario', 'CorreoEnviado'),
                                       'CONDICION' =>array(  
                                       'WHERE'=> array('Codigo_profesor' => $_SESSION['user_session'], 'Fomulario !=0 AND Fomulario !' => 3 ))  
                                     )
@@ -33,9 +33,9 @@ if($_POST['evadato'] == 'E'){
     
      $result = $db->getSelectTabla(
                                 array('TABLA' => 'usuarios', 
-                                      'CAMPOS' =>array( 'Codigo', 'Nombres','Codigo_profesor', 'Fomulario'),
+                                      'CAMPOS' =>array( 'Codigo', 'Nombres','Codigo_profesor', 'Fomulario', 'CorreoEnviado'),
                                       'CONDICION' =>array(  
-                                      'WHERE'=> array('Codigo_profesor' => $_SESSION['user_session'], 'Fomulario' => 0 ))  
+                                      'WHERE'=> array('Codigo_profesor' => $_SESSION['user_session'], 'CorreoEnviado' => 0 ))  
                                     )
     );
    
@@ -67,9 +67,7 @@ if($_POST['evadato'] == 'E'){
                                             <tr>
                                                 <th>Codigo</th>
                                                 <th>Nombre</th>
-                                                <?php if($_POST['evadato'] == 'E'){?>
                                                 <th>Accion</th>
-                                                <?php }?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -77,38 +75,65 @@ if($_POST['evadato'] == 'E'){
                                         $cont = 0;
                                         
                                         if($result){
-                                        foreach ($result as $value) {
-                                            if(isset($value['Fomulario'])){
-                                            $infUsuario = $db->getFormularioConsultas($value['Fomulario']);
-                                            }
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $value['Codigo']; ?></td>
-                                                <td><?php echo $value['Nombres']; ?></td>
-                                                <?php if($_POST['evadato'] == 'E'){?>
-                                                <td>
-                                                    <?php 
-                                                    if(isset($infUsuario)){
-                                                        foreach ($infUsuario as $valueinfo) {
-                                                            if($valueinfo['CodigoComentario']>1){
-                                                     ?>
-                                                            <a href="#" class="btn btn-primary btn-sm vercarm" id="calificar<?php echo $cont;?>" name="<?php echo $cont;?>">Ver</a>
-                                                    <?php 
-                                                            }else{
-                                                    ?>
-                                                        <a href="#" class="btn btn-success btn-sm calificarm" id="calificar<?php echo $cont;?>" name="<?php echo $cont;?>">Evaluar</a>
-                                                    <?php
-                                                            }
+                                            foreach ($result as $value){
+                                                ?>
+                                                <tr>
+                                                <?php
+                                                if($value['CorreoEnviado'] ==1){
+                                                    
+                                                    $infUsuario = $db->getFormularioConsultas($value['Fomulario']);
+                                                   
+                                                }else{
+                                                    $infUsuario = 0;
+                                                }
+                                            ?> 
+                                                    <?php if($_POST['evadato'] == 'PE'){ ?>
+                                                        <td><?php echo $value['Codigo']; ?></td>
+                                                        <td><?php echo $value['Nombres']; ?></td>
+                                                        <td><?php if($value['Fomulario'] != 0){
+                                                        echo "<div class='text-success'>En Proceso</div>";
+                                                        }else{
+                                                            echo "<div class='text-primary'>Esperando</dir>";
                                                         }
-                                                     }
-                                                    ?>
-                                                    <input type="hidden" class="form-control codigocalim" name="codigocali" id="codigocali<?php echo $cont;?>" value="cal">
-                                                    <input type="hidden" class="form-control codigocESTm" name="codigocEST[<?php echo $cont;?>]" id="codigocEST<?php echo $cont;?>" value="<?php echo $value['Codigo']; ?>">
-                                                </td>
-                                                <?php $cont++; }?>
-                                            </tr>
-                                        <?php  
-                                        }
+
+                                                         ?></td>
+                                                     <?php }?>
+                                                    <?php if($_POST['evadato'] == 'E'){ ?>
+                                                    
+                                                        <?php 
+                                                        if($infUsuario > 0){
+                                                            foreach ($infUsuario as $valueinfo) {
+                                                                if($valueinfo['CodigoComentario']>1){
+                                            
+                                                         ?>
+                                                                <td><?php echo $value['Codigo']; ?></td>
+                                                                <td><?php echo $value['Nombres']; ?></td>
+                                                                <td>
+                                                                <a href="#" class="btn btn-primary btn-sm vercarm" id="calificar<?php echo $cont;?>" name="<?php echo $cont;?>">Ver</a>
+                                                                <input type="hidden" class="form-control codigocalim" name="codigocali" id="codigocali<?php echo $cont;?>" value="cal">
+                                                                <input type="hidden" class="form-control codigocESTm" name="codigocEST[<?php echo $cont;?>]" id="codigocEST<?php echo $cont;?>" value="<?php echo $value['Codigo']; ?>">    
+                                                                </td>
+                                                        <?php 
+                                                                }else{
+                                                        ?>
+                                                            <td><?php echo $value['Codigo']; ?></td>
+                                                             <td><?php echo $value['Nombres']; ?></td>
+                                                            <td><a href="#" class="btn btn-success btn-sm calificarm" id="calificar<?php echo $cont;?>" name="<?php echo $cont;?>">Evaluar</a>
+                                                                <input type="hidden" class="form-control codigocalim" name="codigocali" id="codigocali<?php echo $cont;?>" value="cal">
+                                                                 <input type="hidden" class="form-control codigocESTm" name="codigocEST[<?php echo $cont;?>]" id="codigocEST<?php echo $cont;?>" value="<?php echo $value['Codigo']; ?>">
+                                                            </td>
+                                                        <?php
+                                                                }
+                                                            }
+                                                         }
+                                                        ?>
+                                                        
+                                                    
+                                                    <?php $cont++; 
+                                                }?>
+                                                </tr>
+                                            <?php  
+                                            }
                                         }
                                         ?>    
                                         </tbody>

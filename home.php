@@ -26,12 +26,15 @@
 
 
     if($result['Codigo_profesor']==0){
-        $variable = "Profesor";
+        $variable = "Profesor/a";
     }  else {
         $result['Fomulario'];
-        $variable = "Alumno";
+        $variable = "Alumno/a";
     }
 
+    if($result['Codigo_profesor']==2){
+        $variable = "Admin";
+    }
 
     $db->cerrarConexion();
 clearstatcache();
@@ -76,7 +79,7 @@ clearstatcache();
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-fw"></i> <h3>¡Hola! <?php echo  $variable."/a"; ?></h3>
+                        <i class="fa fa-fw"></i> <h3>¡Hola! <?php echo  $variable; ?></h3>
                     </a>
                 </li>
                 <li class="dropdown">
@@ -100,26 +103,43 @@ clearstatcache();
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> Formulario<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level nav-tabs nav-pills nav-stacked ">
-                    <?php if($result['Codigo_profesor']==0){ ?>    
-                    
+                    <?php if($result['Codigo_profesor']==2){?>
+                        <a href="#"><i class="fa fa-sitemap"></i> Panel Admin<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level nav-tabs nav-pills nav-stacked ">
                             <li>
-                                <a href="#" id="linkeva" >Evaluar</a>
-                                <input type="hidden" value="E" id='evadato'/>
-                            </li>
-                            <li>
-                                <a href="#" id="linkpe">Por Evaluar</a>
-                                <input type="hidden" value="PE" id='evadatope'/>
-                            </li>
-                    <?php
-                    }else{
-                    ?>
-                            <li>
-                                <a href="#" id="linkevaluar" >Evaluación</a>
-                            </li>
+                                    <a href="#" id="crudadmin" >Editar Usuario</a>
+                                    <input type="hidden" value="crud" id='crudusurios'/>
+                                </li>
+                                <li>
+                                    <a href="#" id="linklog">Historial</a>
+                                    <input type="hidden" value="estado" id='estado'/>
+                                </li>
+                     <?php }else{
+                            ?> 
+                            <a href="#"><i class="fa fa-sitemap"></i> Formulario<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level nav-tabs nav-pills nav-stacked ">
+                        <?php if($result['Codigo_profesor']==0){ ?>    
+                        
+                                <li>
+                                    <a href="#" id="linkeva" >Evaluar</a>
+                                    <input type="hidden" value="E" id='evadato'/>
+                                </li>
+                                <li>
+                                    <a href="#" id="linkpe">Por Evaluar</a>
+                                    <input type="hidden" value="PE" id='evadatope'/>
+                                </li>
+                        <?php
+                        }else{
+                        ?>
+                                <li>
+                                    <a href="#" id="linkevaluar" >Evaluación</a>
+                                </li>
+                                <li>
+                                    <a href="#" id="linkevaluar2" >Evaluación Parte 2</a>
+                                </li>
                       
                     <?php
+                        }
                     }
                     ?>
                       </ul>
@@ -138,8 +158,8 @@ clearstatcache();
                     
                     
                     <div class="jumbotron">
-                        <h1>Bienvenidos</h1>
-                        <p>Esta es la plataforma de formularis</p>
+                        <img src="img/logo-usabana-Azul.png" alt="univesidad de la Sabana" class="img-rounded img-responsive center-block">
+                        <p>Bienvenidos al Sistema de Información para la Evaluación de Proyectos Mediados por TIC.</p>
                         <p>
                         </p>
                     </div>
@@ -155,6 +175,7 @@ clearstatcache();
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="js/jquery-1.10.2.js"></script>
+
     <!-- Bootstrap Js -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
@@ -165,4 +186,10 @@ clearstatcache();
     <!-- Custom Js -->
     <script src="js/custom-scripts.js"></script>
     <script src="js/scripts.js" type="text/javascript"></script>
+       <!-- Custom JS file -->
+        <script type="text/javascript" src="administrador/js/scriptadmin.js"></script>
+        <script type="text/javascript" src="administrador/js/jquery-1.11.3.min.js"></script>
+
+        
+        
  

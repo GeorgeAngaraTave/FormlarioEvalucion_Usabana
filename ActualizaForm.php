@@ -41,12 +41,12 @@
 exit;    
     }
     $rmd =1;
-    
+   
     if($value['Fomulario']!=0 && $enviarcorreo == "enviarcorreo"){
             $result_Upd = $db->getUpdateTabla(array('TABLA'=>'usuarios',
-                              'CAMPOS' => array('Fomulario' => $codigo),
+                              'CAMPOS' => array('CorreoEnviado' => 1),
                               'CONDICION' => array(
-                                  'WHERE' => array('CorreoEnviado' => 1)
+                                  'WHERE' => array('Fomulario' => $value['Fomulario'])
                               ) 
         ));
 
@@ -62,6 +62,7 @@ exit;
     exit;   
     }
 
+    $from = $value['Fomulario'];
     $fecha_Actual = date("Y-m-d H:i:s");
     $result_fecha = $db->getSelectTabla(
     array('TABLA' => 'rangofecha',
@@ -80,6 +81,11 @@ exit;
     
     //print_r($_POST['camp1']);
     //exit;
+
+    if($from!=0){
+        $delete = $db->consultaTabla("DELETE FROM formularios WHERE Codigo =".$from);
+    }
+    
     
         $result_Upd = $db->getUpdateTabla(array('TABLA'=>'usuarios',
                               'CAMPOS' => array('Fomulario' => $codigo),

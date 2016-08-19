@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    
     $('#login').click(function () {
 
         $.ajax({
@@ -21,6 +21,14 @@ $(document).ready(function () {
     });
 
 });
+
+    $('#loginform').keypress(function (e) {
+        console.log(e.keyCode);
+        if(e.keyCode=='13') {//Keycode for "Return"
+            $('#login').click();
+        }    
+    });
+
 //Evento que muestra el fotmulario Evaluados  
 $('#linkeva').click(function () {
 
@@ -66,7 +74,7 @@ $('#linkpe').click(function () {
     });
 });
 
-//Evento que muestra el fotmulario                                                                            
+//Evento que muestra el fotmulario Parte 1                                                                           
 $('#linkevaluar').click(function () {
     $.ajax({
         type: "POST",
@@ -85,6 +93,27 @@ $('#linkevaluar').click(function () {
         }
     });
 });
+
+//Evento que muestra el fotmulario Parte 2                                                                          
+$('#linkevaluar2').click(function () {
+    $.ajax({
+        type: "POST",
+        url: 'formulario2.php',
+        success: function (data)
+        {
+            if (data) {
+                $('#contenido').html(data);
+                $('.comentario').hide();
+                $('.bottoncomentario').hide();
+                $('.bottonform').show();
+            } else {
+                $("#error").fadeOut();
+                $("#error").html('holaaa')
+            }
+        }
+    });
+});
+
 // evento que fuarda la información de l formulario    
 $('#enviarform').click(function () {
     $.ajax({
@@ -95,8 +124,8 @@ $('#enviarform').click(function () {
         {
             if (data) {
                 $('#mensaje').html(data);
-                $('#formulario').find('input, textarea, select').attr('disabled', 'disabled');
-                $('#enviarform').attr('disabled', 'disabled');
+                //$('#formulario').find('input, textarea, select').attr('disabled', 'disabled');
+                //$('#enviarform').attr('disabled', 'disabled');
                 // window.location.replace('home.php');
             } else {
                 $("#error").fadeOut();
@@ -216,8 +245,52 @@ $('#cerrar').click(function () {
         success: function (data)
         {
             if (data) {
-                $('#mensaje').html(data);
+               console.log(data);
                 window.location.replace('index.php');
+                 $('#mensaje').html("Gracias");
+            } else {
+                $("#error").fadeOut();
+                $("#error").html('holaaa')
+            }
+        }
+    });
+});
+
+//Adminitrador
+//Muestra la lista PE    
+$('#crudadmin').click(function () {
+
+    $.ajax({
+        type: "POST",
+        url: 'administrador/index.php',
+        data: {
+            evadato: $("#crudusurios").val()
+        },
+        success: function (data)
+        {
+            if (data) {
+                $('#contenido').html(data);
+                readRecords(); // calling function
+                //window.location.replace('home.php');
+            } else {
+                $("#error").fadeOut();
+                $("#error").html('holaaa')
+            }
+        }
+    });
+});
+
+//Muestra la lista PE    
+$('#linklog').click(function () {
+
+    $.ajax({
+        type: "POST",
+        url: 'listalog.php',
+        success: function (data)
+        {console.log(data);
+            if (data) {
+                $('#contenido').html(data);
+                //window.location.replace('home.php');
             } else {
                 $("#error").fadeOut();
                 $("#error").html('holaaa')
